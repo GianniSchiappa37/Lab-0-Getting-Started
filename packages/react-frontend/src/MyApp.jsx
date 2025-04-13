@@ -28,25 +28,6 @@ function MyApp() {
     });
   }
   
-  
-
-  function updateList(person) { 
-    postUser(person)
-      .then((response) => {
-        if (response.status === 201) {
-          return response.json(); // Parse the new user with ID
-        } else {
-          throw new Error("Failed to add user.");
-        }
-      })
-      .then((newUser) => {
-        setCharacters([...characters, newUser]); // Add full user (with ID) to state
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-  
 
   function fetchUsers() {
     const promise = fetch("http://localhost:8000/users");
@@ -61,7 +42,7 @@ useEffect(() => {
 }, [] );
   
 function postUser(person) {
-  const promise = fetch("Http://localhost:8000/users", {
+  const promise = fetch("http://localhost:8000/users", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -76,13 +57,13 @@ function updateList(person) {
   postUser(person)
     .then((response) => {
       if (response.status === 201) {
-        return response.json(); // Get the full user object with ID
+        return response.json(); 
       } else {
         throw new Error("Failed to add user");
       }
     })
     .then((newUser) => {
-      setCharacters([...characters, newUser]); // Add the new user with ID
+      setCharacters([...characters, newUser]); 
     })
     .catch((error) => {
       console.log(error);
