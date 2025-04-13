@@ -94,12 +94,16 @@ const addUser = (user) => {
     return user;
   };
   
+  const generateId = () => {
+    return Math.random().toString(36).substr(2, 8); // Generates short random alphanumeric ID
+  };
+
+
   app.post("/users", (req, res) => {
-    console.log("Hello");
     const userToAdd = req.body;
-    addUser(userToAdd);
-    console.log(users);
-    res.status(204).send();
+    userToAdd.id = generateId();
+    const addedUser = addUser(userToAdd);
+    res.status(201).send(addedUser);
   });
 
 
